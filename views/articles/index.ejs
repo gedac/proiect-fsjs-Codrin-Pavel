@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>blog</title>
+    <style>
+        #link_titlu{          
+            color:black;
+            text-decoration: none;
+            opacity:0.6;
+            transition: all 0.7s ease-in-out;
+        }
+
+        .card-title{
+            font-family: "Roboto";
+        }
+
+        .card-body:hover > #link_titlu{
+            opacity: 1;
+            transition: all 0.7s ease-in-out;
+        }
+
+        .card:hover{
+            transform: scale(1.05);
+            transition: all 0.5s ease-in-out;
+        }
+
+       .card{
+        transition: all 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center px-5"> 
+        <h1 class="my-4">Lista articole</h1>
+        <a href="articles/new" class="btn btn-success">+ Adauga articol nou</a>
+
+        <% articles.forEach(article => { %>
+            <div class="card mt-4 text-start">
+                <div class="card-body">
+                    <a id="link_titlu" href="articles/<%= article.slug %>"><h4 class="card-title"><%= article.titlu %></h4></a>
+                    <div class="card-subtitle text-muted mb-2"><%= article.creatLa.toLocaleDateString() %></div>
+                    <div class="card-text mb-2"><%= article.descriere %></div>
+                    <a class="btn btn-info text-white" href="articles/<%= article.slug %>"> Vezi mai mult</a>
+                    <form action="/articles/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-danger">Sterge articolul</button>
+                </form>
+                </div>
+               
+            </div>
+        <% }) %>
+    </div>
+</body>
+</html>
